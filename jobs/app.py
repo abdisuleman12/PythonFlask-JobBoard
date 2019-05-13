@@ -16,11 +16,12 @@ def execute_sql(sql, values = (), commit = False, single = False):
     connection = open_connection()
     cursor = connection.execute(sql, values)
 
-    if commit is True:
+    if commit == True:
         results = connection.commit()
     else:
         # condition_if_true if condition else condition_if_false
         results = cursor.fetchone() if single else cursor.fetchall()
+    cursor.close()
     return results
 
 @app.teardown_appcontext
